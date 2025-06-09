@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "contact": "اتصل بنا",
+    "services": "الخدمات"
+  },
+  "home": {
+    "title": "مرحباً بكم في {{companyName}}",
+    "subtitle": "{{tagline}}",
+    "description": "{{description}}",
+    "cta": "ابدأ الآن",
+    "learnMore": "اعرف المزيد"
+  },
+  "about": {
+    "title": "من نحن",
+    "subtitle": "قصتنا",
+    "description": "{{companyName}} هي شركة ناشئة تفكر للمستقبل وملتزمة بالابتكار والتميز. نحن متخصصون في إنشاء حلول تحدث فرقاً.",
+    "mission": "مهمتنا",
+    "missionText": "{{mission}}",
+    "vision": "رؤيتنا",
+    "visionText": "{{vision}}"
+  },
+  "services": {
+    "title": "خدماتنا",
+    "subtitle": "ما نقدمه",
+    "description": "نحن نقدم حلول تقنية شاملة مصممة خصيصاً لاحتياجات عملك"
+  },
+  "contact": {
+    "title": "اتصل بنا",
+    "subtitle": "تواصل معنا",
+    "description": "نحب أن نسمع منك. أرسل لنا رسالة وسنرد في أقرب وقت ممكن.",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "message": "الرسالة",
+    "send": "إرسال الرسالة",
+    "address": "العنوان",
+    "phone": "الهاتف",
+    "emailLabel": "البريد الإلكتروني"
+  },
+  "footer": {
+    "company": "{{companyName}}",
+    "description": "{{tagline}}",
+    "links": "روابط سريعة",
+    "information": "معلومات",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الخدمة",
+    "rights": "جميع الحقوق محفوظة."
+  },
+  "common": {
+    "language": "اللغة",
+    "english": "English",
+    "arabic": "العربية"
+  }
+}
