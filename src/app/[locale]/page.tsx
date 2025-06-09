@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useTranslations } from '@/lib/i18n';
 import { ArrowRight, ArrowLeft, CheckCircle, Users, Zap, Globe } from 'lucide-react';
 import { features, itSkills } from '@/data/global';
+import { getAssetPath } from '@/lib/utils';
 
 export default function HomePage() {
   const { locale, t } = useTranslations();
@@ -36,7 +37,7 @@ export default function HomePage() {
           <div 
             className="absolute inset-0 opacity-40 bg-cover bg-center animate-slide"
             style={{
-              backgroundImage: `url('/Umayyad_Square,_Damascus.jpg')`,
+              backgroundImage: `url('${getAssetPath('/background.jpg')}')`,
               animation: 'slide 20s ease-in-out infinite alternate'
             }}
           />

@@ -1,5 +1,6 @@
 .next/
 out/
+dist/
 .vercel/
 .env.local
 .env.development.local

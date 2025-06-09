@@ -6,7 +6,10 @@ const nextConfig = {
   distDir: 'dist',
   images: {
     unoptimized: true
-  }
+  },
+  // Configure for GitHub Pages
+  basePath: process.env.NODE_ENV === 'production' ? '/ibtisite' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/ibtisite' : '',
 }
 
 module.exports = nextConfig
