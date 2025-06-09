@@ -1,5 +1,4 @@
 .next/
-out/
 dist/
 .vercel/
 .env.local
