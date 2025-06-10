@@ -1,21 +1,18 @@
-// Global data configuration file
-// This file contains all data that is prone to changing across the website
 
 export const siteConfig = {
   name: {
-    en: "Tison",
-    ar: "تايسون"
+    en: "Ibtisite",
+    ar: "إيبتسايت"
   },
   tagline: {
     en: "Innovative Solutions for Tomorrow",
     ar: "حلول مبتكرة للغد"
   },
   description: {
-    en: "Tison is a cutting-edge startup dedicated to delivering exceptional solutions that transform businesses and drive growth.",
-    ar: "تايسون هي شركة ناشئة متطورة مكرسة لتقديم حلول استثنائية تحول الأعمال وتدفع النمو."
+    en: "Ibitsite is a cutting-edge startup dedicated to delivering exceptional solutions that transform businesses and drive growth.",
+    ar: "إيبتسايت هي شركة ناشئة متطورة مكرسة لتقديم حلول استثنائية تحول الأعمال وتدفع النمو."
   },
   
-  // Contact Information
   contact: {
     email: "info@ibtisite.com",
     phone: "+1 (555) 123-4567",
@@ -25,7 +22,6 @@ export const siteConfig = {
     }
   },
 
-  // Social Media & Links
   social: {
     website: "https://ibtisite.com",
     linkedin: "https://linkedin.com/company/ibtisite",
@@ -33,14 +29,11 @@ export const siteConfig = {
     github: "https://github.com/ibtisite"
   },
 
-  // SEO & Metadata
   seo: {
     keywords: "startup, innovation, technology, solutions, business, IT services, web development, consulting",
     author: "Ibitisite Team"
   }
 };
-
-// IT Skills and Services
 export const itSkills = [
   {
     id: "web-development",
@@ -70,8 +63,6 @@ export const itSkills = [
   },
 
 ];
-
-// Company Values and Mission
 export const companyInfo = {
   mission: {
     en: "To revolutionize the industry through innovative technology and exceptional service.",
@@ -114,8 +105,6 @@ export const companyInfo = {
     }
   ]
 };
-
-// Feature highlights for home page
 export const features = [
   {
     icon: "⚡",
@@ -151,8 +140,6 @@ export const features = [
     }
   }
 ];
-
-// Navigation items
 export const navigation = [
   {
     key: "home",

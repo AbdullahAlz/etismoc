@@ -5,10 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:local": "NODE_ENV=development next build",
     "start": "next start",
     "lint": "next lint",
     "export": "next build && next export",
-    "deploy": "npm run build && touch dist/.nojekyll"
+    "deploy": "npm run build && touch dist/.nojekyll",
+    "serve:local": "npm run build:local && npx serve dist -s -p 3000",
+    "serve:github": "npm run build && mkdir -p test-deploy/ibtisite && cp -r dist/* test-deploy/ibtisite/ && npx serve test-deploy -s -p 3001"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
