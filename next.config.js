@@ -8,8 +8,8 @@ const nextConfig = {
     unoptimized: true
   },
   // Configure for GitHub Pages
-  basePath: process.env.NODE_ENV === 'production' ? '/ibtisite' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/ibtisite' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/etismoc' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/etismoc' : '',
 }
 
 module.exports = nextConfig
