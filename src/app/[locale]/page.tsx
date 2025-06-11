@@ -30,17 +30,19 @@ export default function HomePage() {
 
   return (
     <div className={`bg-white dark:bg-gray-900 transition-colors ${isRTL ? 'rtl' : 'ltr'}`}>
-      {/* Hero Section with Sliding Background */}
+      {/* Hero Section with Fixed Background */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background */}
+        {/* Fixed Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary-900/95 to-blue-900/95 dark:from-gray-900/98 dark:to-gray-800/98">
-          <div 
-            className="absolute inset-0 opacity-40 bg-cover bg-center animate-slide"
-            style={{
-              backgroundImage: `url('${getAssetPath('/background.jpg')}')`,
-              animation: 'slide 20s ease-in-out infinite alternate'
-            }}
-          />
+        <div 
+          className="fixed inset-0 opacity-40 bg-cover bg-center animate-slide"
+          style={{
+            backgroundImage: `url('${getAssetPath('/background.jpg')}')`,
+            animation: 'slide 20s ease-in-out infinite alternate',
+            backgroundAttachment: 'fixed'
+          }}
+        />
+        {/* Gradient Overlay */}
         </div>
         
         {/* Content */}
@@ -55,14 +57,14 @@ export default function HomePage() {
             {t('home.description')}
           </p>
           
-          {/* Scroll Indicator with 3-second delay */}
-          {showScrollIndicator && (
+          
+          {/* {showScrollIndicator && (
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
               <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
                 <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
               </div>
             </div>
-          )}
+          )} */}
         </div>
 
         {/* Floating Elements */}
@@ -72,45 +74,52 @@ export default function HomePage() {
           <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-white/20 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
           <div className="absolute top-1/2 right-1/4 w-1 h-1 bg-white/50 rounded-full animate-float" style={{ animationDelay: '3s' }}></div>
           <div className="absolute bottom-1/3 right-1/2 w-2 h-2 bg-white/25 rounded-full animate-float" style={{ animationDelay: '4s' }}></div>
+          <div className="absolute top-1/4 right-1/4 w-2 h-2 bg-white/30 rounded-full animate-float" style={{ animationDelay: '5s' }}></div>
+          <div className="absolute bottom-1/4 left-1/2 w-3 h-3 bg-white/20 rounded-full animate-float" style={{ animationDelay: '6s' }}></div>
+          <div className="absolute top-1/3 left-1/2 w-1 h-1 bg-white/40 rounded-full animate-float" style={{ animationDelay: '7s' }}></div>
+          <div className="absolute bottom-1/2 right-1/4 w-2 h-2 bg-white/30 rounded-full animate-float" style={{ animationDelay: '8s' }}></div>
+          
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-white dark:bg-gray-900 opacity-99 dark:opacity-99">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-95 dark:opacity-95">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               {isRTL ? 'لماذا تختار إبتيسايت؟' : 'Why Choose Ibtisite?'}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              {isRTL ? 
-                'نحن نقدم حلولاً مبتكرة ومتطورة تلبي احتياجات عملائنا وتحقق أهدافهم' : 
-                'We provide innovative and advanced solutions that meet our clients\' needs and achieve their goals'
+              {isRTL 
+                ? 'نحن نقدم حلولاً مبتكرة ومتطورة تلبي احتياجات عملائنا وتحقق أهدافهم' 
+                : 'We provide innovative and advanced solutions that meet our clients\' needs and achieve their goals'
               }
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
             {features.map((feature, index) => (
-              <div key={index} className="text-center p-6 rounded-lg hover:shadow-lg dark:hover:shadow-gray-700/50 transition-shadow">
-                <div className="flex justify-center mb-4">
-                  {getIconForFeature(index)}
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                  {feature.title[locale]}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  {feature.description[locale]}
-                </p>
+            <div className="group text-center p-6 rounded-lg transition-all hover:shadow-lg dark:hover:shadow-gray-600/50 bg-gray-100/100 dark:bg-gray-800/100">
+              <div className="flex justify-center mb-4">
+                {getIconForFeature(index)}
               </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                {feature.title[locale]}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                {feature.description[locale]}
+              </p>
+            </div>
+
             ))}
           </div>
         </div>
       </section>
 
+
       {/* Services/Skills Section */}
       <section className="py-20 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-95 dark:opacity-95">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               {isRTL ? 'خدماتنا' : 'Our Services'}
@@ -166,8 +175,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary-600 dark:bg-primary-700">
+      <section className="py-20 bg-primary-600 dark:bg-primary-700 opacity-99">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             {isRTL ? 'هل أنت مستعد للبدء؟' : 'Ready to Get Started?'}

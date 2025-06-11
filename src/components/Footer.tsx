@@ -9,8 +9,8 @@ const Footer = () => {
   const isRTL = locale === 'ar';
 
   return (
-    <footer className={`bg-gray-900 dark:bg-gray-950 text-white transition-colors ${isRTL ? 'rtl' : 'ltr'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className={`bg-gray-900 dark:bg-gray-950 text-white transition-colors opacity-99 ${isRTL ? 'rtl' : 'ltr'}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
