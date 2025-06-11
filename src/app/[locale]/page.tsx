@@ -99,7 +99,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
             {features.map((feature, index) => (
-            <div className="group text-center p-6 rounded-lg transition-all hover:shadow-lg dark:hover:shadow-gray-600/50 bg-gray-100/100 dark:bg-gray-800/100">
+            <div key={index} className="group text-center p-6 rounded-lg transition-all hover:shadow-lg dark:hover:shadow-gray-600/50 bg-gray-100/100 dark:bg-gray-800/100">
               <div className="flex justify-center mb-4">
                 {getIconForFeature(index)}
               </div>
