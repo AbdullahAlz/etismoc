@@ -55,14 +55,14 @@ export const navigation = [
       ar: "من نحن"
     }
   },
-  {
-    key: "careers",
-    href: "/careers",
-    name: {
-      en: "Careers",
-      ar: "الوظائف"
-    }
-  },
+  // {
+  //   key: "careers",
+  //   href: "/careers",
+  //   name: {
+  //     en: "Careers",
+  //     ar: "الوظائف"
+  //   }
+  // },
   {
     key: "contact",
     href: "/contact",

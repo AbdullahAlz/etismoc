@@ -1,12 +1,24 @@
 'use client';
 
 import { useTranslations } from '@/lib/i18n';
-import { Target, Eye, Users, Award } from 'lucide-react';
+import { Target, Eye, Users, Award, Zap, Rocket, MapPin, Globe} from 'lucide-react';
 import { aboutData } from '@/data/about';
 
 export default function AboutPage() {
   const { locale, t } = useTranslations();
   const isRTL = locale === 'ar';
+
+  // Icon mapping function
+  const getIcon = (iconName: string) => {
+    const iconMap: { [key: string]: any } = {
+      Zap,
+      Rocket,
+      Globe,
+      MapPin,
+      Award // default fallback
+    };
+    return iconMap[iconName] || Award;
+  };
 
   const stats = [
     { number: '100+', label: isRTL ? 'عميل راضي' : 'Happy Clients' },
@@ -15,29 +27,12 @@ export default function AboutPage() {
     { number: '24/7', label: isRTL ? 'دعم العملاء' : 'Customer Support' },
   ];
 
-  const team = [
-    {
-      name: isRTL ? 'سامي الزين' : 'Sami Alzein',
-      role: isRTL ? 'المدير التنفيذي' : 'CEO & Founder',
-      description: isRTL ? 
-        'رائد في مجال التكنولوجيا مع خبرة تزيد عن 15 عاماً في بناء الشركات الناجحة' :
-        'Technology entrepreneur with over 15 years of experience building successful companies'
-    },
-    {
-      name: isRTL ? 'سارة أحمد' : 'Sarah Johnson',
-      role: isRTL ? 'مدير التكنولوجيا' : 'CTO',
-      description: isRTL ?
-        'خبيرة في التكنولوجيا والابتكار مع شغف بتطوير حلول متطورة' :
-        'Technology and innovation expert with a passion for developing cutting-edge solutions'
-    },
-    {
-      name: isRTL ? 'محمد علي' : 'Mike Davis',
-      role: isRTL ? 'مدير التسويق' : 'Marketing Director',
-      description: isRTL ?
-        'استراتيجي تسويق متمرس يركز على بناء علاقات قوية مع العملاء' :
-        'Experienced marketing strategist focused on building strong customer relationships'
-    }
-  ];
+  const team = aboutData.team.filter(member => member).map((member) => ({
+    name: member.name[locale],
+    role: member.role[locale],
+    description: member.bio[locale],
+    image: member.image
+  }));
 
   return (
     <div className={`bg-white dark:bg-gray-900 transition-colors ${isRTL ? 'rtl' : 'ltr'}`}>
@@ -58,7 +53,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/*
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -74,7 +69,7 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Mission & Vision Section */}
       <section className="py-20 bg-gray-50 dark:bg-gray-800">
@@ -128,20 +123,23 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {aboutData.fullStory.values.map((value, index) => (
-              <div key={index} className="text-center p-6 bg-gray-50 dark:bg-gray-800 hover:shadow-lg transition-shadow">
-                <div className="bg-primary-100 dark:bg-primary-800 w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <Award className="w-8 h-8 text-primary-600 dark:text-primary-400" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {aboutData.fullStory.values.map((value, index) => {
+              const IconComponent = getIcon(value.icon || 'Award');
+              return (
+                <div key={index} className="text-center p-6 bg-gray-50 dark:bg-gray-800 hover:shadow-lg transition-shadow">
+                  <div className="bg-primary-100 dark:bg-primary-800 w-16 h-16 flex items-center justify-center mx-auto mb-4 rounded-lg">
+                    <IconComponent className="w-8 h-8 text-primary-600 dark:text-primary-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    {value.name[locale]}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {value.description[locale]}
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                  {value.name[locale]}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  {value.description[locale]}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -164,8 +162,16 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {team.map((member, index) => (
               <div key={index} className="text-center bg-white dark:bg-gray-700 p-8 hover:shadow-lg transition-shadow">
-                <div className="w-32 h-32 bg-gray-300 dark:bg-gray-600 mx-auto mb-6 flex items-center justify-center">
-                  <Users className="w-16 h-16 text-gray-500 dark:text-gray-400" />
+                <div className="w-32 h-32 bg-gray-300 dark:bg-gray-600 mx-auto mb-6 flex items-center justify-center overflow-hidden rounded-full">
+                  {member.image ? (
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <Users className="w-16 h-16 text-gray-500 dark:text-gray-400" />
+                  )}
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   {member.name}
