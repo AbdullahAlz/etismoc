@@ -20,7 +20,7 @@ export const siteConfig = {
     email: `info@${globalname}.${tld}`,
     phone: "+1 (555) 123-4567",
     address: {
-      en: "al-Insha'at,, Homs, Syria",
+      en: "Al-Insha'at,, Homs, Syria",
       ar: "الإنشاءات، خلف جامع الدروبي، حمص، سوريا"
     }
   },

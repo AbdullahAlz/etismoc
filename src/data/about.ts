@@ -124,7 +124,7 @@ export const aboutData = {
     },
     {
       name: {
-        en: "Abdulaziz Qattan",
+        en: "Abdulaziz Kattan",
         ar: "عبد العزيز قطّان"
       },
       role: {
