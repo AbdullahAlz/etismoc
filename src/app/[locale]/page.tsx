@@ -216,8 +216,8 @@ export default function HomePage() {
           </h2>
           <p className="text-xl text-primary-100 dark:text-primary-200 mb-8 max-w-2xl mx-auto">
             {isRTL ?
-              'انضم إلى عملائنا الراضين واكتشف كيف يمكن لحلولنا أن تحول عملك' :
-              'Join our satisfied clients and discover how our solutions can transform your business'
+              'اتصل بنا و حقِّق أهدافك التقنية'
+              : 'Contact us and achieve your tech goals'
             }
           </p>
           <a
