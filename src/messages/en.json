@@ -3,7 +3,8 @@
     "home": "Home",
     "about": "About Us",
     "contact": "Contact Us",
-    "services": "Services"
+    "services": "Services",
+    "careers": "Careers"
   },
   "home": {
     "title": "Welcome to {{companyName}}",
@@ -22,9 +23,9 @@
     "visionText": "{{vision}}"
   },
   "services": {
-    "title": "Our Services",
+    "title": "Services",
     "subtitle": "What We Offer",
-    "description": "We provide comprehensive IT solutions tailored to your business needs"
+    "description": "We provide comprehensive technology solutions tailored to your business needs"
   },
   "contact": {
     "title": "Contact Us",

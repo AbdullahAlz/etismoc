@@ -2,7 +2,7 @@
 
 import { useTranslations } from '@/lib/i18n';
 import { Target, Eye, Users, Award } from 'lucide-react';
-import { siteConfig, companyInfo } from '@/data/global';
+import { aboutData } from '@/data/about';
 
 export default function AboutPage() {
   const { locale, t } = useTranslations();
@@ -52,7 +52,7 @@ export default function AboutPage() {
               {t('about.subtitle')}
             </p>
             <p className="text-lg text-gray-700 dark:text-gray-300 max-w-4xl mx-auto">
-              {t('about.description')}
+              {aboutData.fullStory.story[locale]}
             </p>
           </div>
         </div>
@@ -83,30 +83,30 @@ export default function AboutPage() {
             {/* Mission */}
             <div className="text-center md:text-left">
               <div className="flex justify-center md:justify-start mb-6">
-                <div className="bg-primary-100 dark:bg-primary-800 p-4 rounded-full">
+                <div className="bg-primary-100 dark:bg-primary-800 p-4">
                   <Target className="w-8 h-8 text-primary-600 dark:text-primary-400" />
                 </div>
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 rtl:text-right">
                 {t('about.mission')}
               </h2>
-              <p className="text-lg text-gray-700 dark:text-gray-300">
-                {companyInfo.mission[locale]}
+              <p className="text-lg text-gray-700 dark:text-gray-300 rtl:text-right">
+                {aboutData.fullStory.mission[locale]}
               </p>
             </div>
 
             {/* Vision */}
             <div className="text-center md:text-left">
               <div className="flex justify-center md:justify-start mb-6">
-                <div className="bg-primary-100 dark:bg-primary-800 p-4 rounded-full">
+                <div className="bg-primary-100 dark:bg-primary-800 p-4">
                   <Eye className="w-8 h-8 text-primary-600 dark:text-primary-400" />
                 </div>
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 rtl:text-right">
                 {t('about.vision')}
               </h2>
-              <p className="text-lg text-gray-700 dark:text-gray-300">
-                {companyInfo.vision[locale]}
+              <p className="text-lg text-gray-700 dark:text-gray-300 rtl:text-right">
+                {aboutData.fullStory.vision[locale]}
               </p>
             </div>
           </div>
@@ -121,18 +121,18 @@ export default function AboutPage() {
               {isRTL ? 'قيمنا' : 'Our Values'}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              {isRTL ? 
-                'القيم الأساسية التي توجه عملنا وتشكل ثقافتنا' :
-                'The core values that guide our work and shape our culture'
+              {isRTL 
+                ? 'القيم التي تقود عملنا وتشكل ثقافة شركتنا'
+                : 'The values that drive our work and shape our company culture'
               }
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {companyInfo.values.map((value, index) => (
-              <div key={index} className="text-center bg-gray-50 dark:bg-gray-800 p-8 rounded-lg">
-                <div className="w-16 h-16 bg-primary-600 dark:bg-primary-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Award className="w-8 h-8 text-white" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {aboutData.fullStory.values.map((value, index) => (
+              <div key={index} className="text-center p-6 bg-gray-50 dark:bg-gray-800 hover:shadow-lg transition-shadow">
+                <div className="bg-primary-100 dark:bg-primary-800 w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                  <Award className="w-8 h-8 text-primary-600 dark:text-primary-400" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   {value.name[locale]}
@@ -147,30 +147,30 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 bg-white dark:bg-gray-900">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               {isRTL ? 'فريقنا' : 'Our Team'}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              {isRTL ? 
-                'تعرف على الفريق المتميز الذي يقود رؤيتنا ويحقق أهدافنا' :
-                'Meet the exceptional team that drives our vision and achieves our goals'
+              {isRTL 
+                ? 'تعرف على الأشخاص الذين يقودون رؤيتنا إلى الواقع'
+                : 'Meet the people who bring our vision to life'
               }
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {team.map((member, index) => (
-              <div key={index} className="text-center bg-gray-50 dark:bg-gray-800 p-8 rounded-lg">
-                <div className="w-24 h-24 bg-primary-600 dark:bg-primary-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Users className="w-12 h-12 text-white" />
+              <div key={index} className="text-center bg-white dark:bg-gray-700 p-8 hover:shadow-lg transition-shadow">
+                <div className="w-32 h-32 bg-gray-300 dark:bg-gray-600 mx-auto mb-6 flex items-center justify-center">
+                  <Users className="w-16 h-16 text-gray-500 dark:text-gray-400" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   {member.name}
                 </h3>
-                <p className="text-primary-600 dark:text-primary-400 font-semibold mb-4">
+                <p className="text-primary-600 dark:text-primary-400 font-medium mb-4">
                   {member.role}
                 </p>
                 <p className="text-gray-600 dark:text-gray-300">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Menu, X, Globe, Moon, Sun } from 'lucide-react';
+import { Menu, X, Globe, Moon, Sun, Languages } from 'lucide-react';
 import { useTranslations, useLocale } from '@/lib/i18n';
 import { useTheme } from '@/lib/theme';
 import { navigation } from '@/data/global';
@@ -51,7 +51,7 @@ const Header = () => {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 p-2 rounded-md transition-colors"
+              className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 p-2  transition-colors"
               aria-label="Toggle dark mode"
             >
               {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
@@ -60,11 +60,11 @@ const Header = () => {
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center space-x-2 rtl:space-x-reverse text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 text-sm font-medium transition-colors rounded-md border border-gray-300 dark:border-gray-600 hover:border-primary-600 dark:hover:border-primary-400"
+              className="flex items-center space-x-2 rtl:space-x-reverse text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 text-sm font-medium transition-colors  border border-gray-300 dark:border-gray-600 hover:border-primary-600 dark:hover:border-primary-400"
               aria-label={`Switch to ${locale === 'en' ? 'Arabic' : 'English'}`}
             >
-              <Globe size={16} />
-              <span className="font-medium">
+              <Languages size={18} />
+                <span className="text-base leading-none font-medium align-middle">
                 {locale === 'en' ? 'العربية' : 'English'}
               </span>
             </button>

@@ -3,7 +3,8 @@
     "home": "الرئيسية",
     "about": "من نحن",
     "contact": "اتصل بنا",
-    "services": "الخدمات"
+    "services": "الخدمات",
+    "careers": "الوظائف"
   },
   "home": {
     "title": "مرحباً بكم في {{companyName}}",
@@ -22,7 +23,7 @@
     "visionText": "{{vision}}"
   },
   "services": {
-    "title": "خدماتنا",
+    "title": "الخدمات",
     "subtitle": "ما نقدمه",
     "description": "نحن نقدم حلول تقنية شاملة مصممة خصيصاً لاحتياجات عملك"
   },

@@ -1,20 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocale, useTranslations } from '@/lib/i18n';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Shield, ExternalLink } from 'lucide-react';
 import { siteConfig } from '@/data/global';
 
 export default function ContactPage() {
   const locale = useLocale();
   const { t } = useTranslations();
   const isRTL = locale === 'ar';
-  
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
+
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [captchaChallenge, setCaptchaChallenge] = useState({ num1: 0, num2: 0, answer: 0 });
+  const [captchaInput, setCaptchaInput] = useState('');
+
+  const locationCoords = { lat: 34.728224, lng: 36.7077392 };
+  const googleMapsUrl = `https://maps.google.com/?q=${locationCoords.lat},${locationCoords.lng}`;
+
+  useEffect(() => {
+    const num1 = Math.floor(Math.random() * 10) + 1;
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    setCaptchaChallenge({ num1, num2, answer: num1 + num2 });
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -24,12 +37,31 @@ export default function ContactPage() {
     }));
   };
 
+  const handleCaptchaInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setCaptchaInput(value);
+    setCaptchaVerified(parseInt(value) === captchaChallenge.answer);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!captchaVerified) {
+      alert(isRTL ? 'يرجى إدخال كود التحقق' : 'Please complete the captcha verification');
+      return;
+    }
+
     // Handle form submission here
     console.log('Form submitted:', formData);
     alert(isRTL ? 'تم إرسال رسالتك بنجاح!' : 'Message sent successfully!');
     setFormData({ name: '', email: '', message: '' });
+    setCaptchaInput('');
+    setCaptchaVerified(false);
+
+    // Generate new captcha
+    const num1 = Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10);
+    const num2 = Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10);
+    setCaptchaChallenge({ num1, num2, answer: num1 + num2 });
   };
 
   const contactInfo = [
@@ -78,7 +110,7 @@ export default function ContactPage() {
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
                 {isRTL ? 'معلومات الاتصال' : 'Contact Information'}
               </h2>
-              
+
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <div key={index} className="flex items-start space-x-4 rtl:space-x-reverse">
@@ -97,14 +129,51 @@ export default function ContactPage() {
                 ))}
               </div>
 
-              {/* Map Placeholder */}
-              <div className="mt-12 bg-gray-200 dark:bg-gray-700 h-64 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-2" />
-                  <p className="text-gray-500 dark:text-gray-400">
-                    {isRTL ? 'خريطة الموقع' : 'Map Location'}
-                  </p>
-                </div>
+              {/* Clickable Map Screenshot */}
+              <div className="mt-12">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                  {isRTL ? 'موقعنا على الخريطة' : 'Our Location'}
+                </h3>
+                <a
+                  href={googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block relative group cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                >
+                  {/* Map Screenshot */}
+                  <div className="w-full h-64 bg-gradient-to-br from-blue-100 to-green-100 dark:from-gray-700 dark:to-gray-600 border border-gray-300 dark:border-gray-600 flex items-center justify-center relative overflow-hidden">
+                    {/* Map image */}
+                    <img
+                      src="/map.png"
+                      className="dark:hidden"
+                    />
+                    <img
+                      src="/map-dark.png"
+                      className="hidden dark:block"
+                    />
+                    {
+                      <div className="absolute inset-0 flex items-center justify-center z-10">
+                        <div className="text-center">
+
+                          <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            {isRTL ? 'مكتب إبتيسايت' : 'Ibtisite Office'}
+                          </p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                            {isRTL ? 'انقر للفتح في خرائط جوجل' : 'Click to open in Google Maps'}
+                          </p>
+                        </div>
+                      </div>
+                    }
+
+                    {/* External link icon - always shown */}
+                    <div className="absolute top-3 right-3 bg-white dark:bg-gray-800 p-2 shadow-md group-hover:scale-110 transition-transform">
+                      <ExternalLink className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    </div>
+
+                    {/* Hover overlay - always shown */}
+                    <div className="absolute inset-0 bg-primary-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </a>
               </div>
             </div>
 
@@ -113,7 +182,7 @@ export default function ContactPage() {
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
                 {isRTL ? 'أرسل لنا رسالة' : 'Send us a Message'}
               </h2>
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -126,7 +195,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     placeholder={t('contact.name')}
                   />
                 </div>
@@ -142,7 +211,7 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     placeholder={t('contact.email')}
                   />
                 </div>
@@ -158,14 +227,62 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
                     placeholder={t('contact.message')}
                   />
                 </div>
 
+                {/* Captcha Section */}
+                <div className="bg-gray-50 dark:bg-gray-800 p-4 border border-gray-200 dark:border-gray-600">
+                  <div className="flex items-center mb-3">
+                    <Shield className="w-5 h-5 text-primary-600 dark:text-primary-400 mr-2" />
+                    <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 rtl:text-lg">
+                      {isRTL
+                        ? 'أكّد أنك لست بوت'
+                        : 'Verify you are not a robot'
+                      }
+                    </h3>
+                  </div>
+
+                  <div className="flex items-center space-x-3 rtl:space-x-reverse">
+                    <div className="flex items-center space-x-2 rtl:space-x-reverse text-lg font-mono">
+                      <span className="text-gray-900 dark:text-white">{captchaChallenge.num1}</span>
+                      <span className="text-gray-600 dark:text-gray-400">+</span>
+                      <span className="text-gray-900 dark:text-white">{captchaChallenge.num2}</span>
+                      <span className="text-gray-600 dark:text-gray-400">=</span>
+                    </div>
+
+                    <input
+                      type="number"
+                      value={captchaInput}
+                      onChange={handleCaptchaInputChange}
+                      placeholder="?"
+                      required
+                      className="w-16 px-2 py-1 text-center border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    />
+
+                    {captchaVerified && (
+                      <div className="text-green-600 dark:text-green-400 text-sm">
+                        ✓ {isRTL ? 'تم التحقق' : 'Verified'}
+                      </div>
+                    )}
+                  </div>
+
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                    {isRTL
+                      ? 'يرجى حل المعادلة الحسابية البسيطة أعلاه للتحقق من أنك لست روبوت'
+                      : 'Please solve the simple math equation above to verify you are not a robot'
+                    }
+                  </p>
+                </div>
+
                 <button
                   type="submit"
-                  className="w-full bg-primary-600 dark:bg-primary-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors flex items-center justify-center space-x-2 rtl:space-x-reverse"
+                  disabled={!captchaVerified}
+                  className={`w-full px-6 py-3 font-semibold transition-colors flex items-center justify-center space-x-2 rtl:space-x-reverse ${captchaVerified
+                    ? 'bg-primary-600 dark:bg-primary-500 text-white hover:bg-primary-700 dark:hover:bg-primary-600'
+                    : 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+                    }`}
                 >
                   <Send className="w-5 h-5" />
                   <span>{t('contact.send')}</span>

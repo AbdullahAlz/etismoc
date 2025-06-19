@@ -1,9 +1,11 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import { useTranslations } from '@/lib/i18n';
 import { ArrowRight, ArrowLeft, CheckCircle, Users, Zap, Globe } from 'lucide-react';
-import { features, itSkills } from '@/data/global';
+import { features } from '@/data/global';
+import { services } from '@/data/services';
+import { latestNews } from '@/data/news';
+import { aboutData } from '@/data/about';
 import { getAssetPath } from '@/lib/utils';
 
 export default function HomePage() {
@@ -11,13 +13,7 @@ export default function HomePage() {
   const isRTL = locale === 'ar';
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowScrollIndicator(true);
-    }, 3000); // 3 second delay
 
-    return () => clearTimeout(timer);
-  }, []);
 
   const getIconForFeature = (index: number) => {
     const icons = [
@@ -34,17 +30,15 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Fixed Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary-900/95 to-blue-900/95 dark:from-gray-900/98 dark:to-gray-800/98">
-        <div 
-          className="fixed inset-0 opacity-40 bg-cover bg-center animate-slide"
-          style={{
-            backgroundImage: `url('${getAssetPath('/background.jpg')}')`,
-            animation: 'slide 20s ease-in-out infinite alternate',
-            backgroundAttachment: 'fixed'
-          }}
-        />
-        {/* Gradient Overlay */}
+          <div
+            className="absolute inset-0 opacity-40 bg-cover bg-center"
+            style={{
+              backgroundImage: `url('${getAssetPath('/background.jpg')}')`,
+              // backgroundAttachment: 'fixed'
+            }}
+          />
         </div>
-        
+
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
@@ -56,8 +50,8 @@ export default function HomePage() {
           <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow-sm">
             {t('home.description')}
           </p>
-          
-          
+
+
           {/* {showScrollIndicator && (
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
               <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
@@ -74,99 +68,172 @@ export default function HomePage() {
           <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-white/20 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
           <div className="absolute top-1/2 right-1/4 w-1 h-1 bg-white/50 rounded-full animate-float" style={{ animationDelay: '3s' }}></div>
           <div className="absolute bottom-1/3 right-1/2 w-2 h-2 bg-white/25 rounded-full animate-float" style={{ animationDelay: '4s' }}></div>
-          <div className="absolute top-1/4 right-1/4 w-2 h-2 bg-white/30 rounded-full animate-float" style={{ animationDelay: '5s' }}></div>
-          <div className="absolute bottom-1/4 left-1/2 w-3 h-3 bg-white/20 rounded-full animate-float" style={{ animationDelay: '6s' }}></div>
-          <div className="absolute top-1/3 left-1/2 w-1 h-1 bg-white/40 rounded-full animate-float" style={{ animationDelay: '7s' }}></div>
-          <div className="absolute bottom-1/2 right-1/4 w-2 h-2 bg-white/30 rounded-full animate-float" style={{ animationDelay: '8s' }}></div>
-          
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-white dark:bg-gray-900 opacity-99 dark:opacity-99">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-95 dark:opacity-95">
+
+      {/* News Section */}
+      <section className="py-20 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              {isRTL ? 'لماذا تختار إبتيسايت؟' : 'Why Choose Ibtisite?'}
+              {isRTL ? 'الأخبار' : 'News'}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              {isRTL 
-                ? 'نحن نقدم حلولاً مبتكرة ومتطورة تلبي احتياجات عملائنا وتحقق أهدافهم' 
-                : 'We provide innovative and advanced solutions that meet our clients\' needs and achieve their goals'
+              {isRTL
+                ? 'اطلع على آخر الأخبار والتطورات في عالم التكنولوجيا'
+                : 'Stay updated with the latest news and developments in technology'
               }
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
-            {features.map((feature, index) => (
-            <div key={index} className="group text-center p-6 rounded-lg transition-all hover:shadow-lg dark:hover:shadow-gray-600/50 bg-gray-100/100 dark:bg-gray-800/100">
-              <div className="flex justify-center mb-4">
-                {getIconForFeature(index)}
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                {feature.title[locale]}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                {feature.description[locale]}
-              </p>
-            </div>
+          {/* Latest News Card */}
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white dark:bg-gray-700 shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="p-8">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                  {latestNews.title[locale]}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                  {latestNews.description[locale]}
+                </p>
 
-            ))}
+                <div className={`flex justify-between items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    {new Date(latestNews.date).toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US')}
+                  </span>
+                  <a
+                    href={`/${locale}/news/${latestNews.slug}`}
+                    className={`inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 transition-colors ${isRTL ? 'flex-row-reverse' : ''
+                      }`}
+                  >
+                    {isRTL ? (
+                      <>
+                        <ArrowLeft className="w-6 h-6 ml-2" />
+                        <span className="font-medium">اقرأ المزيد</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="font-medium">Read more</span>
+                        <ArrowRight className="w-6 h-6 ml-2" />
+                      </>
+                    )}
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-
-      {/* Services/Skills Section */}
+      {/* About Section */}
       <section className="py-20 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-95 dark:opacity-95">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              {isRTL ? 'خدماتنا' : 'Our Services'}
+              {aboutData.whoWeAre.title[locale]}
+            </h2>
+          </div>
+
+          <div className={`flex flex-col lg:flex-row items-center gap-12 ${isRTL ? 'lg:flex-row-reverse' : ''}`}>
+            {/* Image */}
+            <div className="lg:w-1/2">
+              <div className="relative">
+                <img
+                  src={aboutData.whoWeAre.image}
+                  alt={aboutData.whoWeAre.title[locale]}
+                  className="w-full h-96 object-cover shadow-lg"
+                />
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="lg:w-1/2">
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                {aboutData.whoWeAre.description[locale]}
+              </p>
+
+              <a
+                href={`/${locale}/about`}
+                className={`inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 transition-colors font-medium ${isRTL ? 'flex-row-reverse' : ''
+                  }`}
+              >
+                {isRTL ? (
+                  <>
+                    <ArrowLeft className="w-5 h-5 ml-2" />
+                    <span>{aboutData.whoWeAre.showMore[locale]}</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{aboutData.whoWeAre.showMore[locale]}</span>
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </>
+                )}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-20 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              {t('nav.services')}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              {isRTL ? 
-                'نحن نقدم حلول تقنية شاملة مصممة خصيصاً لاحتياجات عملك' : 
-                'We provide comprehensive IT solutions tailored to your business needs'
-              }
+              {t('services.description')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {itSkills.map((skill) => (
-              <div 
-                key={skill.id} 
-                className="bg-white dark:bg-gray-700 p-8 rounded-lg hover:shadow-lg dark:hover:shadow-gray-900/50 transition-all duration-300 hover:scale-105"
+            {services.map((service) => (
+              <div
+                key={service.id}
+                className={`bg-gray-50 dark:bg-gray-800 overflow-hidden hover:shadow-lg dark:hover:shadow-gray-900/50 transition-all duration-300 hover:scale-105 ${service.image ? 'flex flex-col md:flex-row' : ''
+                  } ${isRTL ? 'md:flex-row-reverse' : ''}`}
               >
-                {/* Service Icon */}
-                <div className="text-4xl mb-4">
-                  {skill.icon}
-                </div>
-                
-                {/* Service Title */}
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                  {skill.name[locale]}
-                </h3>
-                
-                {/* Service Description */}
-                <p className="text-gray-600 dark:text-gray-300 mb-6">
-                  {skill.description[locale]}
-                </p>
-                
-                {/* Technologies */}
-                <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wide">
-                    {isRTL ? 'التقنيات' : 'Technologies'}
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {skill.technologies.map((tech, index) => (
-                      <span 
-                        key={index}
-                        className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-200 text-xs px-2 py-1 rounded-full border border-gray-200 dark:border-gray-500"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                {service.image && (
+                  <div className="md:w-1/3 h-48 md:h-auto">
+                    <img
+                      src={service.image}
+                      alt={service.name[locale]}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+                <div className={`p-6 ${service.image ? 'md:w-2/3' : 'w-full'}`}>
+                  {/* Service Icon */}
+                  <div className="text-4xl mb-4">
+                    {service.icon}
+                  </div>
+
+                  {/* Service Title */}
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                    {service.name[locale]}
+                  </h3>
+
+                  {/* Service Description */}
+                  <p className="text-gray-600 dark:text-gray-300 mb-6">
+                    {service.description[locale]}
+                  </p>
+
+                  {/* Technologies */}
+                  <div className="mb-6">
+                    <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wide">
+                      {isRTL ? 'التقنيات' : 'Technologies'}
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {service.technologies.map((tech, index) => (
+                        <span
+                          key={index}
+                          className="bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-xs px-2 py-1 rounded border border-gray-200 dark:border-gray-600"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -174,15 +241,14 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       <section className="py-20 bg-primary-600 dark:bg-primary-700 opacity-99">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            {isRTL ? 'هل أنت مستعد للبدء؟' : 'Ready to Get Started?'}
+            {isRTL ? 'مستعدٌّ للبدء؟' : 'Ready to Get Started?'}
           </h2>
           <p className="text-xl text-primary-100 dark:text-primary-200 mb-8 max-w-2xl mx-auto">
-            {isRTL ? 
-              'انضم إلى عملائنا الراضين واكتشف كيف يمكن لحلولنا أن تحول عملك' : 
+            {isRTL ?
+              'انضم إلى عملائنا الراضين واكتشف كيف يمكن لحلولنا أن تحول عملك' :
               'Join our satisfied clients and discover how our solutions can transform your business'
             }
           </p>

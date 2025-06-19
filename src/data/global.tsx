@@ -158,6 +158,22 @@ export const navigation = [
     }
   },
   {
+    key: "services",
+    href: "/services",
+    name: {
+      en: "Services",
+      ar: "الخدمات"
+    }
+  },
+  {
+    key: "careers",
+    href: "/careers",
+    name: {
+      en: "Careers",
+      ar: "الوظائف"
+    }
+  },
+  {
     key: "contact",
     href: "/contact",
     name: {
