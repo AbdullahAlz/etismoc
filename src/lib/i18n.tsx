@@ -1,7 +1,8 @@
 'use client';
 
 import React, { createContext, useContext, ReactNode } from 'react';
-import { siteConfig, companyInfo } from '@/data/global';
+import { siteConfig } from '@/data/global';
+import { aboutData } from '@/data/about';
 
 type Locale = 'en' | 'ar';
 
@@ -36,25 +37,21 @@ export function I18nProvider({ children, locale, messages }: I18nProviderProps) 
       return key;
     }
 
-    // Replace template variables
     let result = value;
     
-    // Default global variables
     const globalVariables = {
       companyName: siteConfig.name[locale],
       tagline: siteConfig.tagline[locale],
       description: siteConfig.description[locale],
-      mission: companyInfo.mission[locale],
-      vision: companyInfo.vision[locale],
+      mission: aboutData.fullStory.mission[locale],
+      vision: aboutData.fullStory.vision[locale],
       email: siteConfig.contact.email,
       phone: siteConfig.contact.phone,
       address: siteConfig.contact.address[locale]
     };
 
-    // Merge with provided variables
     const allVariables = { ...globalVariables, ...(variables || {}) };
 
-    // Replace {{variable}} patterns
     Object.entries(allVariables).forEach(([varKey, varValue]) => {
       const pattern = new RegExp(`\\{\\{${varKey}\\}\\}`, 'g');
       result = result.replace(pattern, varValue);
@@ -64,7 +61,6 @@ export function I18nProvider({ children, locale, messages }: I18nProviderProps) 
   };
 
   const setLocale = (newLocale: Locale) => {
-    // For static sites, we'll handle this through navigation
     const currentPath = window.location.pathname;
     const pathWithoutLocale = currentPath.replace(/^\/[a-z]{2}/, '');
     window.location.href = `/${newLocale}${pathWithoutLocale}`;

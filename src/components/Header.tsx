@@ -6,6 +6,7 @@ import { useTranslations, useLocale } from '@/lib/i18n';
 import { useTheme } from '@/lib/theme';
 import { navigation } from '@/data/global';
 import Link from 'next/link';
+import { siteConfig } from '@/data/global';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,13 +24,13 @@ const Header = () => {
   const isRTL = locale === 'ar';
 
   return (
-    <header className={`bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50 transition-colors ${isRTL ? 'rtl' : 'ltr'}`}>
+    <header className={`bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition-colors ${isRTL ? 'rtl' : 'ltr'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href={`/${locale}`}>
-              <h1 className="text-2xl font-bold text-primary-600 dark:text-primary-400">Ibtisite</h1>
+              <h1 className="text-2xl font-bold text-primary-600 dark:text-primary-400">{siteConfig.name.en}</h1>
             </Link>
           </div>
 

@@ -1,86 +1,56 @@
+import { Globe, Smartphone, Cloud, BarChart3, Shield, Rocket } from 'lucide-react';
+
 export const services = [
   {
     id: "web-development",
-    icon: "🌐",
-    image: "/icons/web-dev.jpg", // Optional image for service
+    icon: Globe,
     name: {
       en: "Web Development",
       ar: "تطوير المواقع"
     },
     description: {
-      en: "Full-stack web development using modern frameworks and technologies to create responsive, scalable, and user-friendly websites.",
-      ar: "تطوير مواقع الويب الكامل باستخدام أحدث الأطر والتقنيات لإنشاء مواقع ويب سريعة الاستجابة وقابلة للتوسع وسهلة الاستخدام."
+      en: "Full-stack web development using modern and efficient frameworks for responsive and user-friendly websites",
+      ar: "تطوير مواقع ويب متجاوبة وسهلة الاستخدام بمساعدة أحدث أساليب العمل"
     },
     technologies: ["React", "Next.js", "Node.js", "TypeScript", "Tailwind CSS"]
   },
   {
-    id: "mobile-development",
-    icon: "📱",
-    image: "/icons/mobile-dev.jpg",
+    id: "app-development",
+    icon: Smartphone,
     name: {
-      en: "Mobile Development",
-      ar: "تطوير التطبيقات المحمولة"
+      en: "Application Development",
+      ar: "تطوير التطبيقات"
     },
     description: {
-      en: "Native and cross-platform mobile applications for iOS and Android that deliver exceptional user experiences.",
-      ar: "تطبيقات محمولة أصلية ومتعددة المنصات لنظامي iOS و Android تقدم تجارب مستخدم استثنائية."
+      en: "Native and cross-platform applications for iOS, Android and Web, delivering the best user experiences.",
+      ar: "صياغة تطبيقات فريدة على أنظمة iOS و Android و الويب، مع التركيز على حاجات المستخدمين "
     },
-    technologies: ["React Native", "Flutter", "Swift", "Kotlin", "Expo"]
-  },
-  {
-    id: "cloud-solutions",
-    icon: "☁️",
-    image: "/icons/cloud.jpg",
-    name: {
-      en: "Cloud Solutions",
-      ar: "الحلول السحابية"
-    },
-    description: {
-      en: "Scalable cloud infrastructure and services to optimize your business operations and reduce costs.",
-      ar: "بنية تحتية سحابية قابلة للتوسع وخدمات لتحسين عمليات عملك وتقليل التكاليف."
-    },
-    technologies: ["AWS", "Azure", "Google Cloud", "Docker", "Kubernetes"]
+    technologies: ["React", "Flutter", "Spring Boot", "PostgreSQL", "Docker"]
   },
   {
     id: "data-analytics",
-    icon: "📊",
-    image: "/icons/analytics.jpg",
+    icon: BarChart3,
     name: {
-      en: "Data Analytics",
-      ar: "تحليل البيانات"
+      en: "Data Analytics and AI",
+      ar: "تحليل البيانات و ذكاء اصطناعي"
     },
     description: {
-      en: "Transform your data into actionable insights with advanced analytics and machine learning solutions.",
-      ar: "حول بياناتك إلى رؤى قابلة للتنفيذ مع حلول التحليلات المتقدمة والتعلم الآلي."
+      en: "Advanced analytics and machine learning solutions to provide insights and drive business decisions",
+      ar: "تطوير أنظمة متقدمة لتحليل و عرض البيانات وحلول ذكاء اصطناعي"
     },
-    technologies: ["Python", "R", "TensorFlow", "Power BI", "Tableau"]
+    technologies: ["PyTorch", "SciPy", "NumPy", "Matplotlib"]
   },
   {
     id: "cybersecurity",
-    icon: "🔒",
-    image: "/icons/security.jpg",
+    icon: Shield,
     name: {
       en: "Cybersecurity",
       ar: "الأمن السيبراني"
     },
     description: {
-      en: "Comprehensive security solutions to protect your digital assets and ensure compliance.",
-      ar: "حلول أمنية شاملة لحماية أصولك الرقمية وضمان الامتثال."
+      en: "Protection against security threats by providing comprehensive measures",
+      ar: "حماية ضد التهديدات الأمنية من خلال توفير تدابير شاملة"
     },
-    technologies: ["Penetration Testing", "Security Audits", "Compliance", "Risk Assessment"]
-  },
-  {
-    id: "digital-transformation",
-    icon: "🚀",
-    image: "/icons/transformation.jpg",
-    name: {
-      en: "Digital Transformation",
-      ar: "التحول الرقمي"
-    },
-    description: {
-      en: "Guide your organization through digital transformation with strategic planning and implementation.",
-      ar: "اقود مؤسستك عبر التحول الرقمي مع التخطيط الاستراتيجي والتنفيذ."
-    },
-    technologies: ["Process Automation", "Digital Strategy", "Change Management", "Integration"]
+    technologies: ["Penetration Testing", "Security Audits", "Compliance"]
   }
 ];

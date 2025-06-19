@@ -142,7 +142,6 @@ export default function ContactPage() {
                 >
                   {/* Map Screenshot */}
                   <div className="w-full h-64 bg-gradient-to-br from-blue-100 to-green-100 dark:from-gray-700 dark:to-gray-600 border border-gray-300 dark:border-gray-600 flex items-center justify-center relative overflow-hidden">
-                    {/* Map image */}
                     <img
                       src="/map.png"
                       className="dark:hidden"
@@ -156,7 +155,7 @@ export default function ContactPage() {
                         <div className="text-center">
 
                           <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                            {isRTL ? 'مكتب إبتيسايت' : 'Ibtisite Office'}
+                            {isRTL ? `مكتب ${siteConfig.name.ar} `  : `${siteConfig.name.en} office`}
                           </p>
                           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                             {isRTL ? 'انقر للفتح في خرائط جوجل' : 'Click to open in Google Maps'}
@@ -165,12 +164,10 @@ export default function ContactPage() {
                       </div>
                     }
 
-                    {/* External link icon - always shown */}
                     <div className="absolute top-3 right-3 bg-white dark:bg-gray-800 p-2 shadow-md group-hover:scale-110 transition-transform">
                       <ExternalLink className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                     </div>
 
-                    {/* Hover overlay - always shown */}
                     <div className="absolute inset-0 bg-primary-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                 </a>
