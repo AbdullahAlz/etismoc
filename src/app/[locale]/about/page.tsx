@@ -20,12 +20,7 @@ export default function AboutPage() {
     return iconMap[iconName] || Award;
   };
 
-  const stats = [
-    { number: '100+', label: isRTL ? 'عميل راضي' : 'Happy Clients' },
-    { number: '50+', label: isRTL ? 'مشروع مكتمل' : 'Projects Completed' },
-    { number: '5+', label: isRTL ? 'سنوات خبرة' : 'Years Experience' },
-    { number: '24/7', label: isRTL ? 'دعم العملاء' : 'Customer Support' },
-  ];
+
 
   const team = aboutData.team.filter(member => member).map((member) => ({
     name: member.name[locale],
