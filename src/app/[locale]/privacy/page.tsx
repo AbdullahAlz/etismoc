@@ -16,7 +16,7 @@ export default function PrivacyPage() {
         <div className="prose prose-lg max-w-none">
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             {isRTL ? 
-              'آخر تحديث: يونيو 2025' :
+              'آخر تحديث: يونيو/حزيران 2025' :
               'Last updated: June 2025'
             }
           </p>
@@ -27,8 +27,8 @@ export default function PrivacyPage() {
             </h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
               {isRTL ?
-                'نحن نجمع المعلومات التي تقدمها لنا بشكل مباشر، مثل عندما تقوم بإنشاء حساب، أو ملء نموذج، أو الاتصال بنا.' :
-                'We collect information you provide directly to us, such as when you create an account, fill out a form, or contact us.'
+                'نحن نجمع فقط المعلومات التي تقدمها لنا بشكل مباشر، عندما تقوم يالاتصال بنا.':
+                'We collect only information you provide directly to us, when you contact us.'
               }
             </p>
           </section>
@@ -63,8 +63,8 @@ export default function PrivacyPage() {
             </h2>
             <p className="text-gray-700 dark:text-gray-300">
               {isRTL ?
-                'إذا كان لديك أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال بنا على info@ibtisite.com' :
-                'If you have questions about this Privacy Policy, please contact us at info@ibtisite.com'
+                'إذا كان لديك أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال بنا' :
+                'If you have questions about this Privacy Policy, please contact us'
               }
             </p>
           </section>
